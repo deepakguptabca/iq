@@ -146,7 +146,8 @@ def cv():
 
 """
         test = call_gemini(prompt)
-        return jsonify({"gemini_response": test["content"]}), 200
+        return jsonify({"gemini_response": test}), 200
+        print(test)
     except Exception as e:
         return jsonify({"error": str(e)}), 500
 
