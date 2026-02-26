@@ -7,3 +7,4 @@ cloudinary
 gradio_client
 pillow
 cors
+flask_cors

@@ -219,6 +219,7 @@ export const roles: string[] = [
     "UI/UX Designer", "Data Analyst", "System Architect", "QA Engineer",
 ];
 
+
 export interface Level {
     val: string;
     label: string;
