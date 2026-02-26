@@ -226,25 +226,6 @@ export interface Level {
     sub: string;
 }
 
-export const levels: Level[] = [
-    { val: "entry", label: "Entry Level", sub: "0–2 years" },
-    { val: "mid", label: "Mid Level", sub: "2–5 years" },
-    { val: "senior", label: "Senior Level", sub: "5–10 years" },
-    { val: "lead", label: "Lead / Staff", sub: "10+ years" },
-];
-
-export interface RoundType {
-    id: string;
-    label: string;
-    icon: string;
-}
-
-export const roundTypes: RoundType[] = [
-    { id: "technical", label: "Technical", icon: "⚙️" },
-    { id: "behavioral", label: "Behavioral", icon: "🧠" },
-    { id: "case", label: "Case Study", icon: "📊" },
-    { id: "system", label: "System Design", icon: "🏗️" },
-];
 
 // ─── Feedback ─────────────────────────────────────────────────────────────────
 

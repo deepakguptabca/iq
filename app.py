@@ -57,13 +57,23 @@ def call_gemini(prompt):
     result = response.json()
     return result
 
-
+# ─────────────────────────────────────────────
+# Route: /cv pre interview
+# ─────────────────────────────────────────────
 @app.route("/cv", methods=["POST"])
 def cv():
     file = request.files.get("file")
+    role = request.form.get("role_id")          # 👈 new
+    frontend_prompt = request.form.get("prompt")  # 👈 new
 
     if not file:
         return jsonify({"error": "No file uploaded"}), 400
+    
+    if not role:
+        return jsonify({"error": "No role provided"}), 400
+
+    if not frontend_prompt:
+        return jsonify({"error": "No prompt provided"}), 400
 
     # Check file type
     if file.filename.lower().endswith(".pdf"):
@@ -125,84 +135,18 @@ def cv():
 
     # google gemini api call
     try:
-        prompt = f"""You are an experienced professional interviewer conducting a complete mock interview.return the interview in structured format with questions. Do not include any explanations, Markdown formatting,  backticks or /n /u for new line. Return the raw text only in clean and orgainsed way.
+        prompt = f"""
+        {frontend_prompt}
 
-The candidate’s resume is provided below:
+        Target Role:
+        {role}
 
-{result}
-
-You must conduct a structured interview in 3 rounds:
-
-Rules:
-
-Ask one question at a time.
-Maintain professional interview tone.
-
-
-Round 1: Basic / Screening Round
-
-Evaluate:
-
-Candidate introduction (background, education, skills)
-
-Experience discussion
-
-Communication clarity and confidence
-
-Then automatically move to Round 2.
-
-Round 2: Technical Round
-
-Instructions:
-
-Analyze the resume carefully.
-
-Ask technical questions based on:
-
-Mentioned skills
-
-Technologies
-
-Projects
-
-Experience level
-
-Include:
-
-Concept-based question
-
-Scenario-based question
-
-Problem-solving question
-
-Adjust difficulty based on experience.
-
-Then automatically move to Round 3.
-
-Round 3: Behavioral / Managerial Round
-
-Focus on:
-
-Teamwork
-
-Conflict handling
-
-Leadership (if applicable)
-
-Deadline pressure
-
-Decision making
-
-Real-world work scenarios
-
-Rules:
-
-Ask situational questions like:
-"Tell me about a time when..."
+        Candidate Resume:
+        {result}
 
 """
         test = call_gemini(prompt)
-        return jsonify({"gemini_response": test}), 200
+        return jsonify({"gemini_response": test["content"]}), 200
     except Exception as e:
         return jsonify({"error": str(e)}), 500
 

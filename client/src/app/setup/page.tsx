@@ -7,27 +7,39 @@ import Navbar from "@/components/layout/Navbar";
 import SetupCard from "@/components/setup/SetupCard";
 import ResumeUpload from "@/components/setup/ResumeUpload";
 import { Brain, Zap, ChevronDown } from "lucide-react";
-import { roles } from "@/lib/constants";
+import { roles } from "@/lib/roles";
 
 export default function SetupPage() {
     const [resumeFile, setResumeFile] = useState<File | null>(null);
-    const [role, setRole] = useState("");
+    const [roleId, setRoleId] = useState("");   // ✅ changed
     const [loading, setLoading] = useState(false);
     const [step] = useState(1);
 
     const router = useRouter();
 
-    const canProceed = resumeFile && role;
+    const canProceed = resumeFile && roleId;
 
     const handleSubmit = async () => {
-        if (!resumeFile || !role) return;
+        if (!resumeFile || !roleId) return;
 
         try {
             setLoading(true);
 
+            const selectedRole = roles.find(r => r.id === roleId);
+
+            if (!selectedRole) {
+                alert("Invalid role selected");
+                return;
+            }
+
             const formData = new FormData();
             formData.append("file", resumeFile);
-            formData.append("role", role);
+
+            // ✅ Send role_id only (best practice)
+            formData.append("role_id", selectedRole.id);
+
+            // Optional: if you still want to send prompt directly
+            formData.append("prompt", selectedRole.promptTemplate);
 
             const response = await fetch("http://127.0.0.1:5000/cv", {
                 method: "POST",
@@ -38,7 +50,7 @@ export default function SetupPage() {
             console.log("Response from backend:", data);
 
             if (response.ok) {
-                router.push("/interview"); // redirect after success
+                router.push("/interview");
             }
 
         } catch (err) {
@@ -83,25 +95,30 @@ export default function SetupPage() {
                         <label className="text-white/50 text-xs block mb-2">
                             Target Role
                         </label>
+
                         <div className="relative">
                             <select
-                                value={role}
-                                onChange={(e) => setRole(e.target.value)}
+                                value={roleId}
+                                onChange={(e) => setRoleId(e.target.value)}
                                 className="w-full bg-dark border-3 border-dark-300 focus:border-lime text-white p-3 pr-10 outline-none"
                             >
                                 <option value="">Select a role...</option>
                                 {roles.map((r) => (
-                                    <option key={r} value={r}>
-                                        {r}
+                                    <option key={r.id} value={r.id}>
+                                        {r.name}
                                     </option>
                                 ))}
                             </select>
+
                             <ChevronDown className="absolute right-3 top-1/2 -translate-y-1/2 w-4 h-4 text-white/40 pointer-events-none" />
                         </div>
                     </SetupCard>
 
                     {/* Submit Button */}
-                    <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}>
+                    <motion.div
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                    >
                         <button
                             onClick={handleSubmit}
                             disabled={!canProceed || loading}
