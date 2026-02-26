@@ -34,9 +34,16 @@ Round 3: Behavioral
 - Deadline handling
 - Decision making
 
-Ask one question at a time.
-Maintain professional tone.
-Return only structured questions.
+---- some faq questions to make it more personalised ----
+1. Explain time vs space complexity with examples. 2.
+What is the difference between stack and heap memory? 3. How does a hash
+table work? 4. Explain OOP principles. 5. What are race conditions? 6.
+Difference between process and thread? 7. How do you design a scalable
+system? 8. What is dependency injection? 9. Explain RESTful APIs. 10.
+How would you debug a memory leak? 11. What is CAP theorem? 12. Explain
+unit vs integration testing. 13. What is a deadlock? 14. Explain caching
+strategies. 15. Describe a challenging bug you solved.
+
 `
   },
 
@@ -67,8 +74,17 @@ Round 3: Behavioral
 - Handling production bugs
 - Meeting UI deadlines
 
-Ask one question at a time.
-Return clean structured format only.
+---- some faq questions to make it more personalised ----
+Frontend Engineer 
+1. Difference between == and === in JavaScript? 2.
+What is the Virtual DOM? 3. Explain event delegation. 4. What is CORS?
+5. Difference between flexbox and grid? 6. How does browser rendering
+work? 7. What are closures? 8. Explain state management. 9. How do you
+optimize performance? 10. What is lazy loading? 11. Explain
+accessibility (a11y). 12. Difference between controlled/uncontrolled
+components? 13. How do you handle API errors? 14. Explain
+debouncing/throttling. 15. How do you prevent XSS?
+
 `
   },
 
@@ -100,8 +116,16 @@ Round 3: Behavioral
 - Working under traffic spikes
 - Team coordination
 
-Ask one question at a time.
-Return structured questions only.
+---some faq questions to make it more personalised ---
+ 1. Explain REST vs GraphQL. 2. What is database
+indexing? 3. SQL vs NoSQL differences? 4. What is connection pooling? 5.
+Explain authentication vs authorization. 6. How do you design APIs? 7.
+What is middleware? 8. Explain transactions. 9. How do you handle
+concurrency? 10. What is rate limiting? 11. Explain caching (Redis). 12.
+How do you secure an API? 13. Monolith vs microservices? 14. What is
+idempotency? 15. How would you scale a backend?
+
+
 `
   },
 
@@ -132,8 +156,15 @@ Round 3: Behavioral
 - Explaining models to non-technical stakeholders
 - Handling messy datasets
 
-Ask one question at a time.
-Return only structured interview questions.
+---some faq questions to make it more personalised ---
+ 1. Explain bias vs variance. 2. What is overfitting? 3.
+Difference between supervised/unsupervised learning? 4. Explain
+regression vs classification. 5. What is feature engineering? 6. Explain
+cross-validation. 7. Handling missing data? 8. What is p-value? 9.
+Explain confusion matrix. 10. Precision vs recall? 11. What is AUC-ROC?
+12. Explain gradient descent. 13. How do you evaluate models? 14. What
+is data leakage? 15. Describe a DS project.
+
 `
   }
 ];

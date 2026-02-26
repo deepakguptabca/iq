@@ -136,6 +136,12 @@ def cv():
     # google gemini api call
     try:
         prompt = f"""
+        you are an experienced recruiter and you have to set questions for interview based on the resume,below prompt is given and the role.some faq questions are also given to make the questions more relevant or personalised to the role.
+        return the questions in orgainsed way with round.
+        Maintain professional tone.
+        Return only structured questions.
+        don't give any explanation or markdown formatting or backticks or /n for new line. Return the questions in plain text only.
+
         {frontend_prompt}
 
         Target Role:
@@ -146,8 +152,9 @@ def cv():
 
 """
         test = call_gemini(prompt)
-        return jsonify({"gemini_response": test}), 200
+        test = test['candidates'][0]['content']['parts'][0]['text']
         print(test)
+        return jsonify({"gemini_response": test}), 200
     except Exception as e:
         return jsonify({"error": str(e)}), 500
 
