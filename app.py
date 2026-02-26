@@ -7,12 +7,17 @@ from pdf2image import convert_from_bytes
 import io
 import requests
 from gradio_client import Client, handle_file
+from flask_cors import CORS
+
 
 
 # loaded env variables
 dotenv.load_dotenv()
+
 # flask app
 app = Flask(__name__)
+CORS(app)  # Enable CORS for all routes
+
 
 # Gradio model
 client = Client("CohereLabs/command-a-vision")
