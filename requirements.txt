@@ -1,0 +1,8 @@
+flask
+pdfplumber
+requests
+dotenv
+pdf2image
+cloudinary
+gradio_client
+pillow
